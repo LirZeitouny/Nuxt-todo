@@ -1,15 +1,21 @@
 <template>
   <div>
-    <div>My blog navigation bar here</div>
-    <Nuxt />
+    <span>LIR</span>
+    <nuxt-link to="/newTodoPage">Lir</nuxt-link>
+    <ul>
+      <li v-for="todo in todos" :key="todo.text">
+        <span>{{ todo.text }}</span>
+      </li>
+    </ul>
   </div>
 </template>
+
 <script>
 export default {
-  data() {
-    return {
-      msg: "Hello world!",
-    };
+  computed: {
+    todos() {
+      return this.$store.state.list;
+    },
   },
 };
 </script>
