@@ -2,7 +2,7 @@
   <home />
 </template>
 
-<script lang="ts">
+<script>
 import Vue from "vue";
 import Home from "./Home.vue";
 

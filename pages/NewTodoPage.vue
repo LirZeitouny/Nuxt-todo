@@ -1,41 +1,33 @@
 <template>
-  <card id="app">
+  <section>
     <nuxt-link to="./">Back</nuxt-link>
     <form class="vue-form" @submit.prevent="add">
-      <fieldset>
-        <legend>Add new TODO item</legend>
-        <div>
-          <label class="Title" for="title">Title</label>
-          <input
-            type="title"
-            name="title"
-            id="title"
-            required=""
-            v-model="todo.title"
-          />
-        </div>
-        <div>
-          <label class="Description" for="description">Description</label>
-          <input
-            type="text"
-            name="description"
-            id="description"
-            v-model="todo.description"
-          />
-        </div>
-        <div>
-          <input type="submit" value="Add" />
-        </div>
-      </fieldset>
+      <h2>Add new TODO item</h2>
+      <div>
+        <label for="title">Title</label>
+        <input type="title" id="title" required v-model.trim="info.title" />
+      </div>
+      <div>
+        <label for="description">Description</label>
+        <input
+          type="text"
+          name="description"
+          id="description"
+          v-model.trim="info.description"
+        />
+      </div>
+      <div>
+        <button>Add Todo</button>
+      </div>
     </form>
-  </card>
+  </section>
 </template>
 
 <script>
 export default {
   data: () => {
     return {
-      todo: {
+      info: {
         title: "",
         description: "",
       },
@@ -43,9 +35,8 @@ export default {
   },
   methods: {
     add() {
-      if (title.trim()) {
-        this.$store.commit("add", { title });
-      }
+      const { title, description } = this.$data.info;
+      this.$store.commit("add", { title, description });
     },
   },
 };
