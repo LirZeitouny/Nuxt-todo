@@ -1,25 +1,32 @@
 <template>
   <section>
     <nuxt-link to="./">Back</nuxt-link>
-    <form class="vue-form" @submit.prevent="add">
-      <h2>Add new TODO item</h2>
-      <div>
-        <label for="title">Title</label>
-        <input type="title" id="title" required v-model.trim="info.title" />
-      </div>
-      <div>
-        <label for="description">Description</label>
-        <input
-          type="text"
-          name="description"
-          id="description"
-          v-model.trim="info.description"
-        />
-      </div>
-      <div>
-        <button>Add Todo</button>
-      </div>
-    </form>
+    <v-form @submit.prevent="add">
+      <v-card>
+        <v-container>
+          <v-row>
+            <v-col cols="7">
+              <v-text-field
+                v-model="info.title"
+                label="Title"
+                required
+              ></v-text-field>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col cols="7">
+              <v-textarea
+                v-model="info.description"
+                label="Description"
+              ></v-textarea>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-btn type="submit"> submit </v-btn>
+          </v-row>
+        </v-container>
+      </v-card>
+    </v-form>
   </section>
 </template>
 
@@ -35,8 +42,10 @@ export default {
   },
   methods: {
     add() {
-      const { title, description } = this.$data.info;
+      const { title, description } = this.info;
       this.$store.commit("add", { title, description });
+            this.$router.push('./');
+
     },
   },
 };

@@ -12,8 +12,9 @@ export const mutations = {
     });
   },
 
-  remove(state, { id }) {
-    const todo = state.find((todo) => todo.id == id);
+  remove(state, { todo }) {
+
+    // state = state.list.filter((todo) => todo.id !== id)
     if (todo) state.splice(state.indexOf(todo), 1);
   },
 };

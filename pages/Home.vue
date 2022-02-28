@@ -1,45 +1,34 @@
 <template>
   <div>
-    <span>My TODO list</span>
-    <br />
-    <nuxt-link to="/newTodoPage">create +</nuxt-link>
-    <ul>
-      <li v-for="todo in todos" :key="todo.id">
-        <button @click="onSelectTodo(todo)">{{ todo.title }}</button>
-      </li>
-    </ul>
-    <todo-details-modal
-      v-if="todoToShow"
-      :todo="todoToShow"
-      @onClearTodo="onSelectTodo(null)"
-    ></todo-details-modal>
+    <card>
+    <v-card-title>TODO LIST</v-card-title>
+    <v-divider></v-divider>
+        <v-card-actions>
+        <v-btn color="primary"  @click="create"> create </v-btn>
+      </v-card-actions>
+    <v-list>
+      <v-list-item v-for="todo in todos" :key="todo.id">
+        <TodoDetailsModal :todo="todo" ></TodoDetailsModal>
+      </v-list-item>
+    </v-list>
+    </card>
   </div>
 </template>
 
 <script>
 import TodoDetailsModal from "~/components/TodoDetailsModal.vue";
 export default {
-  components: { TodoDetailsModal },
-  data() {
-    return {
-      todoToShow: null,
-    };
-  },
-  methods: {
-    onSelectTodo(todo) {
-      this.$data.todoToShow = todo;
-    },
-  },
+  component: { TodoDetailsModal },
   computed: {
     todos() {
       return this.$store.state.list;
     },
   },
+  methods: {
+    create() {this.$router.push('./NewTodoPage');
+}
+  },
 };
 </script>
 
-<style>
-.example {
-  margin-left: 10em;
-}
-</style>
+<style></style>
