@@ -13,8 +13,10 @@ export const mutations = {
   },
 
   remove(state, { todo }) {
-
-    // state = state.list.filter((todo) => todo.id !== id)
-    if (todo) state.splice(state.indexOf(todo), 1);
+    state.list.splice(state.list.indexOf(todo), 1);
   },
+  
+  toggle(state, { todo }) {
+    todo.done = !todo.done
+  }
 };
